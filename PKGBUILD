@@ -18,8 +18,10 @@ pkgver() {
 
 build() {
 	cd "${srcdir}/${_pkgname}"
-	export GOPATH=${GOPATH}:$(pwd)
-	 go build -o ${_pkgname} src/${_pkgname}/${_pkgname}.go
+	_OLDGOPATH=$GOPATH
+	export GOPATH=$(pwd)
+	go build -o ${_pkgname} src/${_pkgname}/${_pkgname}.go
+	export GOPATH=$_oldGOPATH
 }
 
 package() {
